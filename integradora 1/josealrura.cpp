@@ -113,46 +113,109 @@ vector<int> z_function(const string &texto)
     return z;
 }
 
+// función que busca la subsecuencia más frecuente con un char eliminado en los tres archivos
+void buscarSubsecuenciaMasComun(const string &pattern, const vector<string> &transmissions, ofstream &outputFile)
+{
+    // contador
+    int maxCount = 0;
+    // subsequence
+    string mostFrequentSubsequence;
+
+    // Generar todas las subsecuencias posibles eliminando un carácter
+    // para el patron, generar todas las subsecuencias quitando un carácter
+    for (int i = 0; i < pattern.size(); ++i)
+    {
+        string subsequence = pattern.substr(0, i) + pattern.substr(i + 1);
+
+        // cuenta total de la subsecuencia en todas las transmisiones
+        int totalCount = 0;
+
+        // para cada file de el vector de files
+        for (int j = 0; j < transmissions.size(); ++j)
+        {
+            // aplicar z function
+            string combined = subsequence + "$" + transmissions[j];
+            vector<int> z = z_function(combined);
+
+            // contador
+            int count = 0;
+            // recorrer la subsecuencia
+            for (int k = subsequence.size() + 1; k < z.size(); ++k)
+            {
+                // si hace match entonces sumarlo al contador
+                if (z[k] == subsequence.size())
+                {
+                    count++;
+                }
+            }
+            // sumar al total el contador
+            totalCount += count;
+        }
+
+        // caso en que la subsecuencia se encuentra más veces en total
+        if (totalCount > maxCount)
+        {
+            // actualizamos la subsecuencia más común
+            maxCount = totalCount;
+            mostFrequentSubsequence = subsequence;
+        }
+    }
+
+    // si no está vació la subsecuencia más frecuente
+    if (!mostFrequentSubsequence.empty())
+    {
+        // imprimirlo en el outputfile de check
+        outputFile << "La subsecuencia más encontrada es: " << mostFrequentSubsequence
+                   << " con " << maxCount << " veces en los tres archivos de transmisión" << endl;
+    }
+}
+
 // Función para buscar la ocurrencia de un patrón en una transmisión
-void buscarOcurrencias(const string &transmission, const string &mcode, const string &transmissionName, ofstream &outputFile)
+void buscarOcurrencias(const vector<string> &transmissions, const string &mcode, ofstream &outputFile)
 {
     string pattern;
     istringstream mcodeStream(mcode);
+
     while (getline(mcodeStream, pattern))
     {
-        // String combinado con el patrón$transmission
-        string combined = pattern + "$" + transmission;
-        // Aplicar función Z
-        vector<int> positions;
-        vector<int> z = z_function(combined);
+        outputFile << "Código: " << pattern << endl;
 
-        // Recorrer las posiciones que devuelve y encontrar las posiciones donde hay coincidencia completa
-        for (int i = pattern.size() + 1; i < z.size(); ++i)
+        // dentro del array de files
+        for (size_t j = 0; j < transmissions.size(); ++j)
         {
-            // Si se encuentra parte del patrón
-            if (z[i] == pattern.size())
-            {
-                // Posición actual
-                int position = i - pattern.size() - 1;
-                positions.push_back(position);
-            }
-        }
+            // combinar el string del patron$texto_de_transmisi
+            string combined = pattern + "$" + transmissions[j];
+            vector<int> z = z_function(combined);
 
-        // Si existen posiciones, imprimirlas
-        if (!positions.empty())
-        {
-            outputFile << "Código: " << pattern << endl;
-            outputFile << transmissionName << " ==> " << positions.size() << " veces" << endl;
-            for (size_t i = 0; i < positions.size(); ++i)
+            vector<int> positions;
+            for (int i = pattern.size() + 1; i < z.size(); ++i)
             {
-                outputFile << positions[i];
-                if (i != positions.size() - 1)
+                if (z[i] == pattern.size())
                 {
-                    outputFile << ", ";
+                    int position = i - pattern.size() - 1;
+                    positions.push_back(position);
                 }
             }
-            outputFile << endl;
+
+            // Escribir en el archivo si hay ocurrencias
+            if (!positions.empty())
+            {
+                outputFile << "Transmission" << j + 1 << ".txt ==> " << positions.size() << " veces" << endl;
+                for (size_t i = 0; i < positions.size(); ++i)
+                {
+                    outputFile << positions[i];
+                    if (i != positions.size() - 1)
+                    {
+                        outputFile << ", ";
+                    }
+                }
+                outputFile << endl;
+            }
         }
+
+        // Buscar la subsecuencia más común con un carácter eliminado en las tres transmisiones
+        buscarSubsecuenciaMasComun(pattern, transmissions, outputFile);
+        outputFile << "--------------" << endl;
     }
 }
 
@@ -224,13 +287,13 @@ int main()
     string transmission3 = leerArchivos("transmission3.txt");
     string mcode = leerArchivos("mcode.txt");
 
+    vector<string> transmissions = {transmission1, transmission2, transmission3};
+
     // Archivo de salida
     ofstream outputFile("checking.txt");
-    
+
     // Buscar ocurrencias en cada transmisión
-    buscarOcurrencias(transmission1, mcode, "transmission1.txt", outputFile);
-    buscarOcurrencias(transmission2, mcode, "transmission2.txt", outputFile);
-    buscarOcurrencias(transmission3, mcode, "transmission3.txt", outputFile);
+    buscarOcurrencias(transmissions, mcode, outputFile);
 
     // Procesar el palíndromo más largo en cada transmisión
     procesarPalindromo(transmission1, "transmission1.txt", outputFile);
