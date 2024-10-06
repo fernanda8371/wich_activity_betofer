@@ -98,6 +98,7 @@ void buscarOcurrencias(const string &transmission, const string &mcode, const st
 
 int main()
 {
+    // l
     string transmission1 = leerArchivos("transmission1.txt");
     string transmission2 = leerArchivos("transmission2.txt");
     string transmission3 = leerArchivos("transmission3.txt");
