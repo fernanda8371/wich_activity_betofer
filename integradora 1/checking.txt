@@ -3,7 +3,8 @@ Transmission1.txt ==> 3 veces
 427, 615, 857
 Transmission2.txt ==> 2 veces
 574, 667
-La subsecuencia más encontrada es: A con 144 veces en los tres archivos de transmisión
+Transmission3.txt ==> No encontrado
+La subsecuencia más encontrada es: A con 56 veces en el archivo Transmission1.txt
 --------------
 Código: A13
 Transmission1.txt ==> 3 veces
@@ -12,29 +13,36 @@ Transmission2.txt ==> 1 veces
 253
 Transmission3.txt ==> 1 veces
 344
-La subsecuencia más encontrada es: 13 con 19 veces en los tres archivos de transmisión
+La subsecuencia más encontrada es: 13 con 8 veces en el archivo Transmission2.txt
 --------------
 Código: 73A2
-La subsecuencia más encontrada es: 732 con 2 veces en los tres archivos de transmisión
+Transmission1.txt ==> No encontrado
+Transmission2.txt ==> No encontrado
+Transmission3.txt ==> No encontrado
+La subsecuencia más encontrada es: 7A2 con 1 veces en el archivo Transmission3.txt
 --------------
 Código: 1C3
+Transmission1.txt ==> No encontrado
+Transmission2.txt ==> No encontrado
 Transmission3.txt ==> 1 veces
 527
-La subsecuencia más encontrada es: 13 con 19 veces en los tres archivos de transmisión
+La subsecuencia más encontrada es: 13 con 8 veces en el archivo Transmission2.txt
 --------------
 Código: CDEC
 Transmission1.txt ==> 4 veces
 0, 463, 640, 705
+Transmission2.txt ==> No encontrado
 Transmission3.txt ==> 4 veces
 17, 269, 282, 466
-La subsecuencia más encontrada es: DEC con 8 veces en los tres archivos de transmisión
+La subsecuencia más encontrada es: DEC con 4 veces en el archivo Transmission1.txt
 --------------
 Código: FFF
 Transmission1.txt ==> 1 veces
 764
+Transmission2.txt ==> No encontrado
 Transmission3.txt ==> 5 veces
 352, 353, 354, 355, 356
-La subsecuencia más encontrada es: FF con 15 veces en los tres archivos de transmisión
+La subsecuencia más encontrada es: FF con 9 veces en el archivo Transmission3.txt
 --------------
 Código: 139
 Transmission1.txt ==> 1 veces
@@ -43,14 +51,15 @@ Transmission2.txt ==> 4 veces
 254, 680, 683, 686
 Transmission3.txt ==> 2 veces
 441, 537
-La subsecuencia más encontrada es: 13 con 19 veces en los tres archivos de transmisión
+La subsecuencia más encontrada es: 39 con 10 veces en el archivo Transmission2.txt
 --------------
 Código: CF40
 Transmission1.txt ==> 2 veces
 29, 708
 Transmission2.txt ==> 1 veces
 994
-La subsecuencia más encontrada es: CF4 con 4 veces en los tres archivos de transmisión
+Transmission3.txt ==> No encontrado
+La subsecuencia más encontrada es: F40 con 2 veces en el archivo Transmission1.txt
 --------------
 Código: 77
 Transmission1.txt ==> 4 veces
@@ -59,12 +68,14 @@ Transmission2.txt ==> 6 veces
 22, 414, 415, 646, 745, 974
 Transmission3.txt ==> 6 veces
 66, 427, 637, 638, 639, 640
-La subsecuencia más encontrada es: 7 con 188 veces en los tres archivos de transmisión
+La subsecuencia más encontrada es: 7 con 74 veces en el archivo Transmission2.txt
 --------------
 Código: 567
+Transmission1.txt ==> No encontrado
 Transmission2.txt ==> 1 veces
 272
-La subsecuencia más encontrada es: 57 con 19 veces en los tres archivos de transmisión
+Transmission3.txt ==> No encontrado
+La subsecuencia más encontrada es: 67 con 7 veces en el archivo Transmission2.txt
 --------------
 
 Palíndromo más grande: transmission1.txt==> A2E2A Posición:75

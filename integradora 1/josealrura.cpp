@@ -113,60 +113,58 @@ vector<int> z_function(const string &texto)
     return z;
 }
 
-// función que busca la subsecuencia más frecuente con un char eliminado en los tres archivos
+// Función para buscar la subsecuencia más frecuente con un carácter eliminado en los tres archivos
 void buscarSubsecuenciaMasComun(const string &pattern, const vector<string> &transmissions, ofstream &outputFile)
 {
-    // contador
     int maxCount = 0;
-    // subsequence
     string mostFrequentSubsequence;
+    string transmissionWithMostOccurrences;
 
     // Generar todas las subsecuencias posibles eliminando un carácter
-    // para el patron, generar todas las subsecuencias quitando un carácter
     for (int i = 0; i < pattern.size(); ++i)
     {
         string subsequence = pattern.substr(0, i) + pattern.substr(i + 1);
 
-        // cuenta total de la subsecuencia en todas las transmisiones
-        int totalCount = 0;
+        // Buscar subsecuencia en todas las transmisiones
+        int highestCountInTransmission = 0;
+        string currentTransmission;
 
-        // para cada file de el vector de files
         for (int j = 0; j < transmissions.size(); ++j)
         {
-            // aplicar z function
             string combined = subsequence + "$" + transmissions[j];
             vector<int> z = z_function(combined);
 
-            // contador
             int count = 0;
-            // recorrer la subsecuencia
             for (int k = subsequence.size() + 1; k < z.size(); ++k)
             {
-                // si hace match entonces sumarlo al contador
                 if (z[k] == subsequence.size())
                 {
                     count++;
                 }
             }
-            // sumar al total el contador
-            totalCount += count;
+
+            // Actualizar si la subsecuencia se encuentra más veces en esta transmisión específica
+            if (count > highestCountInTransmission)
+            {
+                highestCountInTransmission = count;
+                currentTransmission = "Transmission" + to_string(j + 1) + ".txt";
+            }
         }
 
-        // caso en que la subsecuencia se encuentra más veces en total
-        if (totalCount > maxCount)
+        // Actualizar la subsecuencia más frecuente considerando las transmisiones
+        if (highestCountInTransmission > maxCount)
         {
-            // actualizamos la subsecuencia más común
-            maxCount = totalCount;
+            maxCount = highestCountInTransmission;
             mostFrequentSubsequence = subsequence;
+            transmissionWithMostOccurrences = currentTransmission;
         }
     }
 
-    // si no está vació la subsecuencia más frecuente
+    // Escribir en el archivo de salida si se encontró alguna subsecuencia más frecuente
     if (!mostFrequentSubsequence.empty())
     {
-        // imprimirlo en el outputfile de check
         outputFile << "La subsecuencia más encontrada es: " << mostFrequentSubsequence
-                   << " con " << maxCount << " veces en los tres archivos de transmisión" << endl;
+                   << " con " << maxCount << " veces en el archivo " << transmissionWithMostOccurrences << endl;
     }
 }
 
@@ -197,7 +195,7 @@ void buscarOcurrencias(const vector<string> &transmissions, const string &mcode,
                 }
             }
 
-            // Escribir en el archivo si hay ocurrencias
+            // escribir en el archivo si hay ocurrencias
             if (!positions.empty())
             {
                 outputFile << "Transmission" << j + 1 << ".txt ==> " << positions.size() << " veces" << endl;
@@ -210,6 +208,11 @@ void buscarOcurrencias(const vector<string> &transmissions, const string &mcode,
                     }
                 }
                 outputFile << endl;
+            }
+            // si no hay
+            else
+            {
+                outputFile << "Transmission" << j + 1 << ".txt ==> No encontrado" << endl;
             }
         }
 
