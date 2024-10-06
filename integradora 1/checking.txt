@@ -55,3 +55,15 @@ transmission3.txt ==> 2 veces
 Código: 77
 transmission3.txt ==> 6 veces
 66, 427, 637, 638, 639, 640
+
+Palíndromo más grande: transmission1.txt==> A2E2A Posición:75
+
+Palíndromo más grande: transmission2.txt==> C8F8C Posición:45
+
+Palíndromo más grande: transmission3.txt==> 0FFFFFFF0 Posición:351
+========================
+Los Substring más largos son:
+T1-T2 ==> 943A5
+T1-T3 ==> CDEC
+T2-T3 ==> 571139
+========================
