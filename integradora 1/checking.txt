@@ -77,12 +77,18 @@ Transmission2.txt ==> 1 veces
 Transmission3.txt ==> No encontrado
 La subsecuencia más encontrada es: 67 con 7 veces en el archivo Transmission2.txt
 --------------
-
-Palíndromo más grande: transmission1.txt==> A2E2A Posición:75
-
-Palíndromo más grande: transmission2.txt==> C8F8C Posición:45
-
-Palíndromo más grande: transmission3.txt==> 0FFFFFFF0 Posición:351
+Palíndromo más grande:
+transmission1.txt ==> Posición: 75
+A2E2A
+----
+Palíndromo más grande:
+transmission2.txt ==> Posición: 45
+C8F8C
+----
+Palíndromo más grande:
+transmission3.txt ==> Posición: 351
+0FFFFFFF0
+----
 ========================
 Los Substring más largos son:
 T1-T2 ==> 943A5

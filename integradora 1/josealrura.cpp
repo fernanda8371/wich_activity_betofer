@@ -7,6 +7,10 @@
 
 using namespace std;
 
+// Evidencia 1
+
+// José Alberto Ruiz Rodríguez A00836129
+// Fernanda Vásquez A00837146
 // Función para transformar la cadena añadiendo caracteres '#' entre cada letra
 string transformarCadena(const string &s)
 {
@@ -20,6 +24,8 @@ string transformarCadena(const string &s)
 }
 
 // Función para encontrar el palíndromo más largo usando el algoritmo de Manacher
+
+// complejidad O(n*m)
 string manacher(const string &s, int &start, int &maxLen)
 {
     // Transformar la cadena original añadiendo '#'
@@ -87,6 +93,7 @@ string leerArchivos(string fileName)
 }
 
 // Devuelve las posiciones de ocurrencias usando la función Z
+// complejidad O(n+m)
 vector<int> z_function(const string &texto)
 {
     int n = texto.length();
@@ -114,6 +121,7 @@ vector<int> z_function(const string &texto)
 }
 
 // Función para buscar la subsecuencia más frecuente con un carácter eliminado en los tres archivos
+// complejidad O(n^2)
 void buscarSubsecuenciaMasComun(const string &pattern, const vector<string> &transmissions, ofstream &outputFile)
 {
     int maxCount = 0;
@@ -233,12 +241,15 @@ void procesarPalindromo(const string &transmission, const string &transmissionNa
     string middle = palindromo;
     string right = transmission.substr(start + maxLen);
 
-    // Escribir la información del palíndromo más largo en el archivo de salida
-    outputFile << "\nPalíndromo más grande: " << transmissionName << "==> " << palindromo
-               << " Posición:" << start << endl;
+
+    outputFile << "Palíndromo más grande:\n";
+    outputFile << transmissionName << " ==> Posición: " << start << "\n";
+    outputFile << middle << "\n";
+    outputFile << "----\n";
 }
 
-// Función para encontrar el substring más largo entre dos transmisiones usando programación dinámica
+// complejidad o(n*m)
+
 string longestCommonSubstring(const string &s1, const string &s2)
 {
     int n = s1.length();
@@ -295,10 +306,8 @@ int main()
     // Archivo de salida
     ofstream outputFile("checking.txt");
 
-    // Buscar ocurrencias en cada transmisión
     buscarOcurrencias(transmissions, mcode, outputFile);
 
-    // Procesar el palíndromo más largo en cada transmisión
     procesarPalindromo(transmission1, "transmission1.txt", outputFile);
     procesarPalindromo(transmission2, "transmission2.txt", outputFile);
     procesarPalindromo(transmission3, "transmission3.txt", outputFile);
