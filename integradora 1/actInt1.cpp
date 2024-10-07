@@ -122,7 +122,7 @@ vector<int> z_function(const string &texto)
 
 // Función para buscar la subsecuencia más frecuente con un carácter eliminado en los tres archivos
 // complejidad O(n^2)
-void buscarSubsecuenciaMasComun(const string &pattern, const vector<string> &transmissions, ofstream &outputFile)
+void buscarSubsecuencia(const string &pattern, const vector<string> &transmissions, ofstream &outputFile)
 {
     int maxCount = 0;
     string mostFrequentSubsequence;
@@ -151,24 +151,26 @@ void buscarSubsecuenciaMasComun(const string &pattern, const vector<string> &tra
                 }
             }
 
-            // Actualizar si la subsecuencia se encuentra más veces en esta transmisión específica
+            // si la subsecuencia se encuentra más veces en esta transmisión específica
             if (count > highestCountInTransmission)
             {
+                // actualizarlo
                 highestCountInTransmission = count;
                 currentTransmission = "Transmission" + to_string(j + 1) + ".txt";
             }
         }
 
-        // Actualizar la subsecuencia más frecuente considerando las transmisiones
+        //  la subsecuencia más frecuente considerando las transmisiones
         if (highestCountInTransmission > maxCount)
         {
+            // actualizar con el maxCount
             maxCount = highestCountInTransmission;
             mostFrequentSubsequence = subsequence;
             transmissionWithMostOccurrences = currentTransmission;
         }
     }
 
-    // Escribir en el archivo de salida si se encontró alguna subsecuencia más frecuente
+    // escribirlo en el output
     if (!mostFrequentSubsequence.empty())
     {
         outputFile << "La subsecuencia más encontrada es: " << mostFrequentSubsequence
@@ -176,7 +178,8 @@ void buscarSubsecuenciaMasComun(const string &pattern, const vector<string> &tra
     }
 }
 
-// Función para buscar la ocurrencia de un patrón en una transmisión
+// funcion para buscar las ocurrencias de un patrón en una transmisión
+// O(n + m) n es la longitud de transmición y m la longitud de el patron
 void buscarOcurrencias(const vector<string> &transmissions, const string &mcode, ofstream &outputFile)
 {
     string pattern;
@@ -189,7 +192,7 @@ void buscarOcurrencias(const vector<string> &transmissions, const string &mcode,
         // dentro del array de files
         for (size_t j = 0; j < transmissions.size(); ++j)
         {
-            // combinar el string del patron$texto_de_transmisi
+            // combinar el string del patron$texto_de_transmision
             string combined = pattern + "$" + transmissions[j];
             vector<int> z = z_function(combined);
 
@@ -199,6 +202,7 @@ void buscarOcurrencias(const vector<string> &transmissions, const string &mcode,
                 if (z[i] == pattern.size())
                 {
                     int position = i - pattern.size() - 1;
+                    // hacer push en el vector de posiciones
                     positions.push_back(position);
                 }
             }
@@ -224,8 +228,8 @@ void buscarOcurrencias(const vector<string> &transmissions, const string &mcode,
             }
         }
 
-        // Buscar la subsecuencia más común con un carácter eliminado en las tres transmisiones
-        buscarSubsecuenciaMasComun(pattern, transmissions, outputFile);
+        //  la subsecuencia más común con un carácter eliminado en las tres transmisiones
+        buscarSubsecuencia(pattern, transmissions, outputFile);
         outputFile << "--------------" << endl;
     }
 }
@@ -241,7 +245,6 @@ void procesarPalindromo(const string &transmission, const string &transmissionNa
     string middle = palindromo;
     string right = transmission.substr(start + maxLen);
 
-
     outputFile << "Palíndromo más grande:\n";
     outputFile << transmissionName << " ==> Posición: " << start << "\n";
     outputFile << middle << "\n";
@@ -249,7 +252,6 @@ void procesarPalindromo(const string &transmission, const string &transmissionNa
 }
 
 // complejidad o(n*m)
-
 string longestCommonSubstring(const string &s1, const string &s2)
 {
     int n = s1.length();
